@@ -147,7 +147,7 @@ async function isGitRepository(folder: WorkspaceFolder): Promise<boolean> {
 	const dotGit = path.join(folder.uri.fsPath, '.git');
 
 	try {
-		const dotGitStat = await new Promise<fs.Stats>((c, e) => fs.stat(dotGit, (err, stat) => err ? e(err) : c(stat)));
+		const dotGitStat = await fs.promises.stat(dotGit);
 		return dotGitStat.isDirectory();
 	} catch (err) {
 		return false;
